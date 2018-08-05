@@ -22,6 +22,6 @@ npm start
 Using the same ``.env`` file, run:
 
 ```sh
-docker run --rm -it --env-file .env -p 3000:3000 eitanya/oauth2-app-mock
+docker run --rm -it --env-file .env -p 3000:3000 lpinc/sample-app-auth
 ```
 
