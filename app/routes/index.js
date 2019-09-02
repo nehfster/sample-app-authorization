@@ -23,9 +23,10 @@ router.get('/logout', function(req, res) {
 
 router.get('/refresh', function(req, res, next) {
   if (req.user.rt) {
-    refresh.requestNewAccessToken('oauth2', req.user.rt, function(err, accessToken, refreshToken) {
+    refresh.requestNewAccessToken('oauth2', req.user.rt, function(err, accessToken, refreshToken, results) {
       req.user.at = accessToken;
       req.user.rt = refreshToken || req.user.rt;
+      req.user.idToken = results.idToken;
       res.redirect("/user");    
     });    
   } else {
