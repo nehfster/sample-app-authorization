@@ -21,14 +21,15 @@ const strategy = new OAuth2Strategy({
     tokenURL: process.env.OAUTH2_TOKEN_URL,
     clientID: process.env.OAUTH2_CLIENT_ID,
     clientSecret: process.env.OAUTH2_CLIENT_SECRET,
-    callbackURL: process.env.OAUTH2_CALLBACK_URL
+    callbackURL: process.env.OAUTH2_CALLBACK_URL,
+    passReqToCallback: true
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(req, accessToken, refreshToken, params, profile, done) {
     if(!process.env.OIDC_USERINFO_URL) {
         return done(null, {
-        at: accessToken, 
-        rt: refreshToken, 
-        prof: { msg: "userinfo url was not defined"} 
+        at: accessToken,
+        rt: refreshToken,
+        idToken:  params['id_token']
       });
     }
    this._oauth2.get(process.env.OIDC_USERINFO_URL, accessToken, function (err, body, res) {
