@@ -3,6 +3,12 @@ extends layout
 block content
   br
   .w3-container
-    .w3-card-4.w3-center(style="padding: 15px;")
-      p Welcome
-      p #{JSON.stringify(user,null,10)}
+    .w3-card-4.w3-left(style="width: 100%; padding: 15px; word-wrap:break-word;")
+      div(style="margin-bottom: 10px;font-size: 2em; text-decoration: underline;") Welcome
+      div(style="font-size: 1.6em; text-decoration: underline;") accessToken:
+      div(style="margin-bottom: 20px;") #{user.at}
+      div(style="font-size: 1.6em; text-decoration: underline;") refreshToken:
+      div(style="margin-bottom: 20px;") #{user.rt}
+      if user.idToken
+        div(style="font-size: 1.6em; text-decoration: underline;") idToken:
+        div(style="margin-bottom: 20px;") #{user.idToken}
