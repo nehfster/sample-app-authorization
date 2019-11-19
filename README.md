@@ -8,6 +8,7 @@ OAUTH2_CLIENT_SECRET=************
 OAUTH2_CALLBACK_URL=http://localhost:3000/callback
 OAUTH2_AUTHORIZATION_URL=https://login-poc.auth0.com/authorize
 OAUTH2_TOKEN_URL=https://login-poc.auth0.com/oauth/token
+OAUTH2_REVOKE_URL=https://login-poc.auth0.com/oauth/token/revoke
 ```
 
 run:

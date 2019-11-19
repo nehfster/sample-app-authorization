@@ -1,6 +1,8 @@
 const express = require('express');
 const passport = require('passport');
 const refresh = require('passport-oauth2-refresh');
+const rp = require('request-promise');
+// const process = require('process');
 const router = express.Router();
 
 /* GET home page. */
@@ -16,8 +18,12 @@ router.get('/login', passport.authenticate('oauth2', {
 });
 
 router.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
+  if(process.env.OAUTH2_REVOKE_URL){
+    logout(req,res);
+  }
+  else{
+    res.redirect('/');
+  }
 });
 
 
@@ -52,5 +58,32 @@ router.get('/failure', function(req, res) {
     error_description: error_description[0],
   });
 });
+
+
+function logout(req, res) {
+  const options = {
+    method: 'POST',
+    uri: process.env.OAUTH2_REVOKE_URL,
+    form: {
+      // Like <input type="text" name="name">
+      // name: 'Josh'
+      client_id: process.env.OAUTH2_CLIENT_ID,
+      client_secret: process.env.OAUTH2_CLIENT_SECRET,
+      token: req.user.rt
+    },
+    headers: {
+      /* 'content-type': 'application/x-www-form-urlencoded' */ // Is set automatically
+    }
+  };
+
+  rp(options)
+      .then(function (body) {
+        req.logout();
+        res.redirect('/');
+      })
+      .catch(function (err) {
+        res.redirect('/failure')
+      });
+}
 
 module.exports = router;
