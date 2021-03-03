@@ -21,7 +21,7 @@
     "passport": "^0.3.0",
     "passport-oauth2": "^1.4.0",
     "passport-oauth2-refresh": "^1.0.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
     "serve-favicon": "^2.4.0"
