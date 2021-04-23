@@ -16,6 +16,7 @@ dotenv.load();
 const routes = require('./routes/index');
 const user = require('./routes/user');
 
+// OAuth2 environment variables
 const strategy = new OAuth2Strategy({
     authorizationURL: process.env.OAUTH2_AUTHORIZATION_URL,
     tokenURL: process.env.OAUTH2_TOKEN_URL,
