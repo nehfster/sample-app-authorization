@@ -45,6 +45,7 @@ const strategy = new OAuth2Strategy({
   }
 );
 
+// using passport
 passport.use(strategy);
 refresh.use(strategy);
 
